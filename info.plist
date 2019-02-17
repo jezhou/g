@@ -188,7 +188,7 @@ print(json.dumps(alfred_items))
 		<key>60ADD0C4-7FC9-4670-B015-58FE5D781397</key>
 		<dict>
 			<key>xpos</key>
-			<integer>620</integer>
+			<integer>660</integer>
 			<key>ypos</key>
 			<integer>200</integer>
 		</dict>

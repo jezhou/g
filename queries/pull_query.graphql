@@ -1,0 +1,22 @@
+query { 
+  viewer { 
+    login
+    pullRequests(last:10) {
+      nodes {
+        title
+        url
+        updatedAt
+        number
+        reviews(states: [APPROVED, CHANGES_REQUESTED], last:10) {
+        	nodes {
+        	  id
+            author {
+              login
+            }
+            state
+        	}
+        }
+      }
+    }
+  }
+}
