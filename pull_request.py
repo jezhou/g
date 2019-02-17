@@ -1,36 +1,44 @@
-def generate_subtitle(pr):
-  subtitle = '#' + str(pr['number'])
-  approved_reviewers = []
-  rejected_reviewers = []
-  for review in pr['reviews']['nodes']:
-    if review['state'] == 'APPROVED':
-      approved_reviewers += ['@' + review['author']['login']]
-    elif review['state'] == 'CHANGES_REQUESTED':
-      rejected_reviewers += ['@' + review['author']['login']]
+def reviewer_names(reviewers):
+  return ' ,'.join(map(lambda reviewer: '@' + reviewer['author']['login'], reviewers))
 
-  if len(approved_reviewers) > 0:
-    white_check_mark = u'\U00002705'
-    subtitle = white_check_mark + ' ' + subtitle
-    approved_reviewers = 'Approved by: ' + ' ,'.join(approved_reviewers)
-  elif len(rejected_reviewers) > 0:
-    red_x = u'\U0000274C'
-    subtitle = red_x + ' ' + subtitle
-    approved_reviewers = 'Rejected by: ' + ' ,'.join(approved_reviewers) 
-  else:
+def generate_status(pr):
+  if len(pr.reviewers) == 0:
     red_circle = u'\U0001F354'
-    subtitle = red_circle + ' ' + subtitle
-    approved_reviewers = 'Needs Review'
+    return '{emoji} Needs Review'.format(emoji=red_circle)
 
-  return subtitle + " | " + approved_reviewers
+  approved_reviewers = None
+  rejected_reviewers = None
+  if len(pr.approved_reviewers) > 0:
+    white_check_mark = u'\U00002705'
+    approved_reviewers = u'{emoji} Approved by: {reviewers}'.format(
+      emoji=white_check_mark,
+      reviewers=reviewer_names(pr.approved_reviewers)
+    )
+
+  if len(pr.rejected_reviewers) > 0:
+    red_x = u'\U0000274C'
+    rejected_reviewers = u'{emoji} Rejected by: {reviewers}'.format(
+      emoji=red_x,
+      reviewers=reviewer_names(pr.rejected_reviewers)
+    )
+
+  return approved_reviewers or rejected_reviewers
 
 class PullRequest:
   def __init__(self, pr):
-    self.pull_request = pr
+    self.title = pr['title']
+    self.number = pr['number']
+    self.url = pr['url']
+    self._set_reviewers(pr)
+
+  def _set_reviewers(self, pr):
+    self.reviewers = pr['reviews']['nodes']
+    self.approved_reviewers = filter(lambda review: review['state'] == 'APPROVED', self.reviewers)
+    self.rejected_reviewers = filter(lambda review: review['state'] == 'CHANGES_REQUESTED', self.reviewers)
 
   def itemize(self):
-    pr = self.pull_request
     return {
-        'title': pr['title'],
-        'subtitle': generate_subtitle(pr),
-        'arg': pr['url']
+        'title': '#{number} {title}'.format(number=self.number, title=self.title),
+        'subtitle': generate_status(self),
+        'arg': self.url
     }
