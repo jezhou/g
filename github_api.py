@@ -1,4 +1,5 @@
 import requests
+from pull_request import PullRequest
 
 class GithubAPI:
   def __init__(self):
@@ -25,4 +26,5 @@ class GithubAPI:
     prs = self.response['data']['viewer']['pullRequests']['nodes']
     if(reversed):
       prs = sorted(prs, reverse=True, key=lambda k: k['updatedAt'])
-    return prs
+    
+    return map(lambda pr: PullRequest(pr), prs)

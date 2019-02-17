@@ -23,11 +23,11 @@ def generate_subtitle(pr):
 
   return subtitle + " | " + approved_reviewers
 
-class PrAlfredItem:
+class PullRequest:
   def __init__(self, pr):
     self.pull_request = pr
 
-  def to_item(self):
+  def itemize(self):
     pr = self.pull_request
     return {
         'title': pr['title'],
