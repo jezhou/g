@@ -15,5 +15,6 @@ class Review:
       'subtitle': 'By @{author}, created {days_ago} days ago'.format(
         author=self.author,
         days_ago=days_delta.days
-      )
+      ),
+      'arg': self.url
     }
