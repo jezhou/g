@@ -1,5 +1,6 @@
 import requests
 from models.pull_request import PullRequest
+from models.review import Review
 
 class GithubAPI:
   def __init__(self):
@@ -28,3 +29,7 @@ class GithubAPI:
       prs = sorted(prs, reverse=True, key=lambda k: k['updatedAt'])
     
     return map(lambda pr: PullRequest(pr), prs)
+
+  def pending_reviews(self):
+    reviews = self.response['data']['search']['nodes']
+    return map(lambda r: Review(r), reviews)

@@ -1,0 +1,16 @@
+query { 
+	search(query:"is:open is:pr review-requested:jezhou archived:false", type: ISSUE, last:10) {
+    issueCount
+		nodes {
+			... on PullRequest {
+        title
+        number
+        url
+        createdAt
+        author {
+          login
+        }
+      }
+    }
+  }
+}
