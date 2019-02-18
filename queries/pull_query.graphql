@@ -1,7 +1,7 @@
 query { 
   viewer { 
     login
-    pullRequests(last:10) {
+    pullRequests(states: [OPEN], last:10) {
       nodes {
         title
         url

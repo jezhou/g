@@ -1,10 +1,12 @@
 def reviewer_names(reviewers):
-  return ' ,'.join(map(lambda reviewer: '@' + reviewer['author']['login'], reviewers))
+  reviewer_list = map(lambda reviewer: '@' + reviewer['author']['login'], reviewers)
+  uniq_reviewers = list(set(reviewer_list))
+  return ', '.join(uniq_reviewers)
 
 def generate_status(pr):
   if len(pr.reviewers) == 0:
     red_circle = u'\U0001F354'
-    return '{emoji} Needs Review'.format(emoji=red_circle)
+    return u'{emoji} Needs Review'.format(emoji=red_circle)
 
   approved_reviewers = None
   rejected_reviewers = None
