@@ -7,6 +7,17 @@ query {
         url
         updatedAt
         number
+        mergeable
+        commits(last: 1) {
+          nodes {
+            commit {
+              status {
+                id
+                state
+              }
+            }
+          }
+        }
         reviews(states: [APPROVED, CHANGES_REQUESTED], last:10) {
         	nodes {
         	  id

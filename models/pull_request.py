@@ -1,36 +1,48 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 def reviewer_names(reviewers):
   reviewer_list = map(lambda reviewer: '@' + reviewer['author']['login'], reviewers)
   uniq_reviewers = list(set(reviewer_list))
   return ', '.join(uniq_reviewers)
 
-def generate_status(pr):
+def generate_review_status(pr):
   if len(pr.reviewers) == 0:
-    red_circle = u'\U0001F354'
-    return u'{emoji} Needs Review'.format(emoji=red_circle)
+    return u'🍔 Waiting for review...'
 
   approved_reviewers = None
   rejected_reviewers = None
   if len(pr.approved_reviewers) > 0:
-    white_check_mark = u'\U00002705'
-    approved_reviewers = u'{emoji} Approved by: {reviewers}'.format(
-      emoji=white_check_mark,
+    approved_reviewers = u'✅ {reviewers}'.format(
       reviewers=reviewer_names(pr.approved_reviewers)
     )
 
   if len(pr.rejected_reviewers) > 0:
-    red_x = u'\U0000274C'
-    rejected_reviewers = u'{emoji} Rejected by: {reviewers}'.format(
-      emoji=red_x,
+    rejected_reviewers = u'❌ {reviewers}'.format(
       reviewers=reviewer_names(pr.rejected_reviewers)
     )
 
-  return approved_reviewers or rejected_reviewers
+  return ', '.join(filter(None, (approved_reviewers, rejected_reviewers)))
+
+def generate_build_status(pr):
+  build_status = {
+    'FAILURE': u'👎',
+    'SUCCESS': u'👍'    
+  }.get(pr.build_status)
+  return build_status or u'🤞'
+
+def generate_status(pr):
+  reviewer_byline = generate_review_status(pr)
+  build_byline = generate_build_status(pr)
+  return ' | '.join([build_byline, reviewer_byline])
+
 
 class PullRequest:
   def __init__(self, pr):
     self.title = pr['title']
     self.number = pr['number']
     self.url = pr['url']
+    self.build_status = pr['commits']['nodes'][0]['commit']['status']['state']
     self._set_reviewers(pr)
 
   def _set_reviewers(self, pr):
