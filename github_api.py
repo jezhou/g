@@ -1,5 +1,5 @@
 import requests
-from pull_request import PullRequest
+from models.pull_request import PullRequest
 
 class GithubAPI:
   def __init__(self):
