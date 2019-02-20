@@ -8,6 +8,52 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>074FB819-187A-4231-B7A8-493350EE9BEC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9882FFFE-80AB-47D9-9120-02A863C6E470</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5F860B30-3906-44B9-BF9E-446AEF1DF617</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A76BC268-79D5-4A74-9C4E-7B3794E0B3B0</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>074FB819-187A-4231-B7A8-493350EE9BEC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>37130073-5949-4CC1-AEFB-1526118C0FE4</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>60ADD0C4-7FC9-4670-B015-58FE5D781397</key>
 		<array/>
 		<key>84281126-2A79-4DF7-B30C-BB84E5D451FC</key>
@@ -28,6 +74,32 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>60ADD0C4-7FC9-4670-B015-58FE5D781397</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>A76BC268-79D5-4A74-9C4E-7B3794E0B3B0</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>C628C3FE-6414-4950-8AFF-E6C0E45E37B8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>E812BDB7-1E38-4B97-8CA7-F50B2D6935F7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5F860B30-3906-44B9-BF9E-446AEF1DF617</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -159,7 +231,7 @@ print(json.dumps(alfred_items))
 				<key>scriptfile</key>
 				<string>pulls.py</string>
 				<key>subtext</key>
-				<string>View PRs</string>
+				<string>View pull requests.</string>
 				<key>title</key>
 				<string>Pull Requests</string>
 				<key>type</key>
@@ -240,11 +312,201 @@ print(json.dumps(alfred_items))
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Good job!</string>
+				<key>title</key>
+				<string>✅ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>C628C3FE-6414-4950-8AFF-E6C0E45E37B8</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Landed</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>A76BC268-79D5-4A74-9C4E-7B3794E0B3B0</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./ship_it.py</string>
+				<key>type</key>
+				<integer>8</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5F860B30-3906-44B9-BF9E-446AEF1DF617</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>gland</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Filtering landable requests...</string>
+				<key>script</key>
+				<string></string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>./landable.py</string>
+				<key>subtext</key>
+				<string>Land eligible pull requests.</string>
+				<key>title</key>
+				<string>Land Pull Requests</string>
+				<key>type</key>
+				<integer>8</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E812BDB7-1E38-4B97-8CA7-F50B2D6935F7</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Please retry.</string>
+				<key>title</key>
+				<string>❌ {query}</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>9882FFFE-80AB-47D9-9120-02A863C6E470</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>inputstring</key>
+				<string>{query}</string>
+				<key>matchcasesensitive</key>
+				<false/>
+				<key>matchmode</key>
+				<integer>2</integer>
+				<key>matchstring</key>
+				<string>Could not merge</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.filter</string>
+			<key>uid</key>
+			<string>074FB819-187A-4231-B7A8-493350EE9BEC</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>'{query}', {allvars}</string>
+				<key>cleardebuggertext</key>
+				<false/>
+				<key>processoutputs</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.debug</string>
+			<key>uid</key>
+			<string>37130073-5949-4CC1-AEFB-1526118C0FE4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>074FB819-187A-4231-B7A8-493350EE9BEC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>650</integer>
+			<key>ypos</key>
+			<integer>560</integer>
+		</dict>
+		<key>37130073-5949-4CC1-AEFB-1526118C0FE4</key>
+		<dict>
+			<key>xpos</key>
+			<integer>620</integer>
+			<key>ypos</key>
+			<integer>680</integer>
+		</dict>
+		<key>5F860B30-3906-44B9-BF9E-446AEF1DF617</key>
+		<dict>
+			<key>note</key>
+			<string>GraphQL Mutation to Merge PR</string>
+			<key>xpos</key>
+			<integer>410</integer>
+			<key>ypos</key>
+			<integer>420</integer>
+		</dict>
 		<key>60ADD0C4-7FC9-4670-B015-58FE5D781397</key>
 		<dict>
 			<key>xpos</key>
@@ -254,6 +516,8 @@ print(json.dumps(alfred_items))
 		</dict>
 		<key>84281126-2A79-4DF7-B30C-BB84E5D451FC</key>
 		<dict>
+			<key>note</key>
+			<string>View open pull requests</string>
 			<key>xpos</key>
 			<integer>100</integer>
 			<key>ypos</key>
@@ -261,10 +525,42 @@ print(json.dumps(alfred_items))
 		</dict>
 		<key>96881319-6A9E-4EAF-8523-493AF87D5486</key>
 		<dict>
+			<key>note</key>
+			<string>View reviews requested</string>
 			<key>xpos</key>
 			<integer>100</integer>
 			<key>ypos</key>
-			<integer>200</integer>
+			<integer>280</integer>
+		</dict>
+		<key>9882FFFE-80AB-47D9-9120-02A863C6E470</key>
+		<dict>
+			<key>xpos</key>
+			<integer>860</integer>
+			<key>ypos</key>
+			<integer>530</integer>
+		</dict>
+		<key>A76BC268-79D5-4A74-9C4E-7B3794E0B3B0</key>
+		<dict>
+			<key>xpos</key>
+			<integer>650</integer>
+			<key>ypos</key>
+			<integer>360</integer>
+		</dict>
+		<key>C628C3FE-6414-4950-8AFF-E6C0E45E37B8</key>
+		<dict>
+			<key>xpos</key>
+			<integer>860</integer>
+			<key>ypos</key>
+			<integer>330</integer>
+		</dict>
+		<key>E812BDB7-1E38-4B97-8CA7-F50B2D6935F7</key>
+		<dict>
+			<key>note</key>
+			<string>Merge and delete an eligible pull request</string>
+			<key>xpos</key>
+			<integer>100</integer>
+			<key>ypos</key>
+			<integer>510</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>

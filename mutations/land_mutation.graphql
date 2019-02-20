@@ -1,0 +1,8 @@
+mutation {
+  mergePullRequest(input:$inputParams) {
+    pullRequest {
+      number
+      url
+    }
+  }
+}

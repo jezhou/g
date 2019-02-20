@@ -3,11 +3,21 @@ query {
     login
     pullRequests(states: [OPEN], last:10) {
       nodes {
+        id
         title
         url
         updatedAt
         number
         mergeable
+        headRepository {
+          name
+        }
+        headRepositoryOwner {
+          login
+        }
+        headRef {
+          name
+        }
         commits(last: 1) {
           nodes {
             commit {

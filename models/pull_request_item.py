@@ -50,3 +50,15 @@ class PullRequestItem:
         'subtitle': self.subtitle,
         'arg': self.arg
     }
+  
+  def itemize_landable(self):
+    return {
+        'title': self.title,
+        'subtitle': u'🚢 {bn}'.format(bn=self.pull_request.branch_name),
+        'arg': '{owner} {repo} {number} {branch_name}'.format(
+          owner=self.pull_request.owner,
+          repo=self.pull_request.repo,
+          number=self.pull_request.number,
+          branch_name=self.pull_request.branch_name
+        )
+    }
