@@ -1,2 +1,2 @@
-.auth_token
 *.pyc
+.github_token

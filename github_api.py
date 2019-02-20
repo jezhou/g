@@ -6,7 +6,7 @@ class GithubAPI:
   def __init__(self):
     self.github_api_url = 'https://api.github.com/graphql'
     self.github_api_rest_url = 'https://api.github.com'
-    self.token = open('.auth_token', 'r').read()
+    self.token = open('.github_token', 'r').read()
     self.headers = {
         'authorization': 'bearer {token}'.format(token=self.token)
     }

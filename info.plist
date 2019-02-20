@@ -43,16 +43,6 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
-			<dict>
-				<key>destinationuid</key>
-				<string>37130073-5949-4CC1-AEFB-1526118C0FE4</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
 		</array>
 		<key>60ADD0C4-7FC9-4670-B015-58FE5D781397</key>
 		<array/>
@@ -131,7 +121,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
-				<integer>68</integer>
+				<integer>0</integer>
 				<key>keyword</key>
 				<string>gp</string>
 				<key>queuedelaycustom</key>
@@ -145,87 +135,7 @@
 				<key>runningsubtext</key>
 				<string>Fetching PRs...</string>
 				<key>script</key>
-				<string>import requests
-import json
-import emoji
-
-github_api_url = 'https://api.github.com/graphql'
-headers = {
-  'authorization': 'bearer ***REMOVED***'
-}
-
-gqlQuery = """
-  query { 
-    viewer { 
-      login
-      pullRequests(last:10) {
-        nodes {
-          number
-          title
-          url
-          updatedAt
-          author {
-            login
-          }
-          reviews(states: APPROVED, first:10) {
-            nodes {
-              id
-              author {
-                login
-              }
-              state
-            }
-          }
-        }
-      }
-    }
-  }
-"""
-
-query = {
-  'query': gqlQuery
-}
-
-r = requests.post(
-  github_api_url, 
-  headers=headers,
-  json=query
-)
-
-pull_requests = r.json()['data']['viewer']['pullRequests']['nodes']
-pull_requests = sorted(pull_requests, reverse=True, key=lambda k:k['updatedAt'])
-
-def get_subtitle(pr):
-  subtitle = '#' + str(pr['number'])
-  approved_reviewers = []
-  for review in pr['reviews']['nodes']:
-    if review['state'] == 'APPROVED':
-      approved_reviewers += ['@' + review['author']['login']]
-
-  if len(approved_reviewers) &gt; 0:
-    white_check_mark = u'\U00002705'
-    subtitle = white_check_mark + ' ' + subtitle
-    approved_reviewers = 'Approved by: ' + ' ,'.join(approved_reviewers)
-  else:
-    red_circle = u'\U0001F354'
-    subtitle = red_circle + ' ' + subtitle
-    approved_reviewers = 'Needs Approval'
-
-  return subtitle + " | " + approved_reviewers
-
-  
-
-def pr_to_alfred_item(pr):
-  return {
-    'title': pr['title'],
-    'subtitle': emoji.emojize(get_subtitle(pr)),
-    'arg': pr['url']
-  }
-
-alfred_items = { 'items': map(pr_to_alfred_item, pull_requests) }
-
-print(json.dumps(alfred_items))
-</string>
+				<string></string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -462,23 +372,6 @@ print(json.dumps(alfred_items))
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argument</key>
-				<string>'{query}', {allvars}</string>
-				<key>cleardebuggertext</key>
-				<false/>
-				<key>processoutputs</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.debug</string>
-			<key>uid</key>
-			<string>37130073-5949-4CC1-AEFB-1526118C0FE4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -491,21 +384,14 @@ print(json.dumps(alfred_items))
 			<key>ypos</key>
 			<integer>560</integer>
 		</dict>
-		<key>37130073-5949-4CC1-AEFB-1526118C0FE4</key>
-		<dict>
-			<key>xpos</key>
-			<integer>620</integer>
-			<key>ypos</key>
-			<integer>680</integer>
-		</dict>
 		<key>5F860B30-3906-44B9-BF9E-446AEF1DF617</key>
 		<dict>
 			<key>note</key>
 			<string>GraphQL Mutation to Merge PR</string>
 			<key>xpos</key>
-			<integer>410</integer>
+			<integer>340</integer>
 			<key>ypos</key>
-			<integer>420</integer>
+			<integer>440</integer>
 		</dict>
 		<key>60ADD0C4-7FC9-4670-B015-58FE5D781397</key>
 		<dict>
@@ -563,6 +449,13 @@ print(json.dumps(alfred_items))
 			<integer>510</integer>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict>
+		<key>github_token</key>
+		<string>YOUR_API_TOKEN</string>
+	</dict>
+	<key>version</key>
+	<string></string>
 	<key>webaddress</key>
 	<string></string>
 </dict>
